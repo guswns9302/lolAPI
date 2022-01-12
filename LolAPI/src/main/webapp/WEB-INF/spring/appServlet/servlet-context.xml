@@ -27,19 +27,20 @@
 	
 		<!-- DataSource 정보 등록 -->
 	<!-- <context:property-placeholder location="file:///C:/Users/YHJ/oracle_connection.prop"/>  -->
-	<context:property-placeholder location="classpath:/oracle/oracle_connection.prop"/>
+	<!-- context:property-placeholder location="classpath:/oracle/oracle_connection.prop"/-->
+	<context:property-placeholder location="file:///C:/Users/YHJ/oracle_connection.prop"/>
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.OracleDriver"></beans:property>
 		<beans:property name="url" value="${url}"></beans:property>
-		<beans:property name="username" value="${user1}"></beans:property>
-		<beans:property name="password" value="${password1}"></beans:property>
+		<beans:property name="username" value="${user}"></beans:property>
+		<beans:property name="password" value="${password}"></beans:property>
 	</beans:bean>
 	
 	<!-- DataSource와 Mybatis 연결-->
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 		<beans:property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"></beans:property>
-		<beans:property name="mapperLocations" value="classpath:/mybatis/mapper/*.xml"></beans:property>
+		<!-- beans:property name="mapperLocations" value="classpath:/mybatis/mapper/*.xml"></beans:property-->
 	</beans:bean>
 	
 	<!-- DAO 에서 사용할 SQL 세션 생성용 빈 -->
