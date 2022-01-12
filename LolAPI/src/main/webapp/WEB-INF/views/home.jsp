@@ -14,10 +14,10 @@
 	롤 전적 확인 api 활용  
 </h1>
 	<section class="container p-5 my-5 border">
-		<form action="/serch" method="post"> 
+		<form action="/search" method="post"> 
 			<div class="mb-3">
 		    	<label for="pwd" class="form-label">소환사명</label>
-		    	<input type="text" class="form-control" id="summoner" placeholder="소환사 닉네임 입력" name="summoner">
+		    	<input type="text" class="form-control" id="summonerName" placeholder="소환사 닉네임 입력" name="summonerName">
 		  	</div>
 		  	<div class="mb-3" id="button_serch">
 		  		<button type="submit" class="btn btn-primary">검색</button>

@@ -12,7 +12,7 @@
 	<section class="container p-5 my-5 border">
 			<div class="mb-3">
 		    	<label for="pwd" class="form-label">소환사명</label>
-		    	<input type="text" class="form-control" id="summonerName" name="summonerName" readOnly>
+		    	<input type="text" class="form-control" readOnly>
 		  	</div>
 	</section>
 </body>
