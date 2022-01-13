@@ -1,6 +1,6 @@
 package com.web.lolapi.model;
 
-public class SummonerInfoDTO {
+public class SummonerDTO {
 	private String accountId;
 	private int profileIconid;
 	private long revisionDate;

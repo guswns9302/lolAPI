@@ -17,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.web.lolapi.model.SummonerInfoDTO;
+import com.web.lolapi.model.LeagueEntryDTO;
+import com.web.lolapi.model.LiotService;
+import com.web.lolapi.model.SummonerDTO;
 
 @Controller
 public class HomeController {
@@ -41,39 +43,17 @@ public class HomeController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String serch(String summonerName, Model model) {
-		BufferedReader buffer = null;
-		SummonerInfoDTO summonerinfo = new SummonerInfoDTO();
 		
-		String lolAPI_key = "RGAPI-60792256-0524-4f24-bfdf-6d84f92ba01d";
-		String summonerURL = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" +lolAPI_key;
-		URL url;
-		try {
-			url = new URL(summonerURL);
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			urlConnection.setRequestMethod("GET");
-			
-			buffer = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-			String data = buffer.readLine();
-			
-			JSONParser jsonParser = new JSONParser();
-			JSONObject summonerData = (JSONObject) jsonParser.parse(data);
-			
-			summonerinfo.setId(summonerData.get("id").toString());
-			summonerinfo.setAccountId(summonerData.get("accountId").toString());
-			summonerinfo.setPuuid(summonerData.get("puuid").toString());
-			summonerinfo.setName(summonerData.get("name").toString());
-			summonerinfo.setProfileIconid(Integer.parseInt(summonerData.get("profileIconId").toString()));
-			summonerinfo.setRevisionDate(Long.parseLong(summonerData.get("revisionDate").toString()));
-			summonerinfo.setSummonerLevel(Integer.parseInt(summonerData.get("summonerLevel").toString()));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String lolAPI_key = "RGAPI-952fa711-55ec-43a8-93d9-975f22978016";
 		
-		model.addAttribute("summonerinfo",summonerinfo);
-		//String profile_icons_url = "http://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + summonerinfo.getProfileIconid() + ".png";
-		model.addAttribute("profile_icon","http://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + summonerinfo.getProfileIconid() + ".png");
-		
+		LiotService service = new LiotService();
+		SummonerDTO summoner = service.searchSummoner(lolAPI_key, summonerName);
+		LeagueEntryDTO league = service.searchLeague(lolAPI_key, summoner.getId());
+
+		model.addAttribute("summoner",summoner);
+		model.addAttribute("profile_icon","http://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + summoner.getProfileIconid() + ".png");
+		model.addAttribute("league",league);
+		model.addAttribute("rank_icon","resources/base-icons/" + league.getTier() + ".png");
 		return "search";
 	}
 	
