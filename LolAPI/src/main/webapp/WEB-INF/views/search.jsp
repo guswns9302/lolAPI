@@ -11,9 +11,21 @@
 <body>
 	<section class="container p-5 my-5 border">
 			<div class="mb-3">
-		    	<label for="pwd" class="form-label">소환사명</label>
-		    	<input type="text" class="form-control" readOnly>
+				<label>소환사 이름</label>
+		    	<p>${summonerinfo.getName() }</p>
 		  	</div>
+		  	<hr>
+		  	<div class="mb-3">
+		  		<label>소환사 레벨</label>
+		    	<p>${summonerinfo.getSummonerLevel() }</p>
+		  	</div>
+		  	<hr>
+		  	<div class="mb-3">
+		  		<label>소환사 아이콘</label>
+		    	<img src=${profile_icon } />
+		  	</div>
+		  	<hr>
+		  	
 	</section>
 </body>
 </html>
