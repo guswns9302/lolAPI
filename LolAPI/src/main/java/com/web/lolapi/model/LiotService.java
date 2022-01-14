@@ -70,6 +70,8 @@ public class LiotService {
 			league.setWins(Integer.parseInt(leagueData.get("wins").toString()));
 			league.setLosses(Integer.parseInt(leagueData.get("losses").toString()));
 			
+			double total = league.getWins() + league.getLosses();
+			league.setWinRate((int)Math.round(league.getWins() / total * 100));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

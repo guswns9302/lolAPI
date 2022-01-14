@@ -11,6 +11,7 @@ public class LeagueEntryDTO {
 	private int leaguePoints;
 	private int wins;
 	private int losses;
+	private int winRate;
 //	private boolean hotStreak;
 //	private boolean veteran;
 //	private boolean freshBlood;
@@ -70,5 +71,12 @@ public class LeagueEntryDTO {
 	public void setLosses(int losses) {
 		this.losses = losses;
 	}
+	public int getWinRate() {
+		return winRate;
+	}
+	public void setWinRate(int winRate) {
+		this.winRate = winRate;
+	}
+	
 	
 }

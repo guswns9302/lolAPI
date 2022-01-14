@@ -10,20 +10,18 @@
     <jsp:include page="${head_url }" flush="false" />
 </head>
 <body>
-<h1>
-	롤 전적 확인 api 활용  
-</h1>
+	<div class="container-fluid p-5 bg-primary text-white text-center">
+		  <h1>Liot API 활용</h1>
+		  <p>전적 검색 웹페이지 만들기</p>
+	</div>
 	<section class="container p-5 my-5 border">
+		<h3>League of Legends 전적 검색</h3>
 		<form action="/search" method="post"> 
-			<div class="mb-3">
-		    	<label for="pwd" class="form-label">소환사명</label>
-		    	<input type="text" class="form-control" id="summonerName" placeholder="소환사 닉네임 입력" name="summonerName">
-		  	</div>
-		  	<div class="mb-3" id="button_serch">
-		  		<button type="submit" class="btn btn-primary">검색</button>
-		  	</div>
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" name="summonerName" placeholder="ex) hide on bush">
+				<button class="btn btn-success" type="submit">Search</button>
+			</div>
 		</form>
 	</section>
-
 </body>
 </html>

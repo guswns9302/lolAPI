@@ -1,15 +1,9 @@
 package com.web.lolapi;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.Locale;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -43,13 +37,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String serch(String summonerName, Model model) {
-		
-		String lolAPI_key = "RGAPI-952fa711-55ec-43a8-93d9-975f22978016";
+		String lolAPI_key = "RGAPI-49abd081-efb8-49b3-a711-635eaf778187";
 		
 		LiotService service = new LiotService();
 		SummonerDTO summoner = service.searchSummoner(lolAPI_key, summonerName);
 		LeagueEntryDTO league = service.searchLeague(lolAPI_key, summoner.getId());
-
 		model.addAttribute("summoner",summoner);
 		model.addAttribute("profile_icon","http://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + summoner.getProfileIconid() + ".png");
 		model.addAttribute("league",league);
