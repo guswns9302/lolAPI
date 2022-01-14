@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -78,5 +79,58 @@ public class LiotService {
 		return league;
 	}
 	
+	public ChampionInfoDTO lotation(String lolAPI_key) {
+		
+		String lotationChampURL = "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations/" + "?api_key=" + lolAPI_key;
+		BufferedReader buffer = null;
+		URL url = null;
+		ChampionInfoDTO freeChamp = new ChampionInfoDTO();
+		
+		try {
+			url = new URL(lotationChampURL);
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setRequestMethod("GET");
+			
+			buffer = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+			String data = buffer.readLine();
+			JSONParser jsonParser = new JSONParser();
+			JSONObject lotationChampList = (JSONObject) jsonParser.parse(data);
+			
+			freeChamp.setFreeChampionIds((List<Integer>) lotationChampList.get("freeChampionIds"));
+			freeChamp.setFreeChampionIdsForNewPlayers((List<Integer>) lotationChampList.get("freeChampionIdsForNewPlayers"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return freeChamp;
+	}
 	
+//	public ChampionInfoDTO champInfo() {
+//		String champURL = "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json";
+//		BufferedReader buffer = null;
+//		URL url = null;
+//		ChampionInfoDTO champInfo = new ChampionInfoDTO();
+//		
+//		try {
+//			url = new URL(champURL);
+//			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//			urlConnection.setRequestMethod("GET");
+//			
+//			buffer = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+//			String data = buffer.readLine();
+//			System.out.println(data);
+//			JSONParser jsonParser = new JSONParser();
+//			JSONObject jsonbObject = (JSONObject) jsonParser.parse(data);
+//			
+//			JSONObject champdata = (JSONObject) jsonbObject.get("data");
+//			JSONArray jsonArray = (JSONArray) champdata;
+//			//System.out.println(jsonArray);
+//			//JSONObject champData = (JSONObject) jsonArray.get(0);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return champInfo;
+//	}
 }

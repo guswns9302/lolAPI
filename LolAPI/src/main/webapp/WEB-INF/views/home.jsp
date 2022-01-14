@@ -23,5 +23,6 @@
 			</div>
 		</form>
 	</section>
+	<p>${lotation.getFreeChampionIds().get(0) }</p>
 </body>
 </html>

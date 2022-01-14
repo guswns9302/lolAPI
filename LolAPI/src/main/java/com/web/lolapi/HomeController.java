@@ -1,7 +1,5 @@
 package com.web.lolapi;
 
-import java.text.DateFormat;
-import java.util.*;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -11,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.web.lolapi.model.ChampionInfoDTO;
 import com.web.lolapi.model.LeagueEntryDTO;
 import com.web.lolapi.model.LiotService;
 import com.web.lolapi.model.SummonerDTO;
@@ -20,24 +19,26 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	String lolAPI_key = "RGAPI-49abd081-efb8-49b3-a711-635eaf778187";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		LiotService service = new LiotService();
+		ChampionInfoDTO lotation = service.lotation(lolAPI_key);
 		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+		// lotation.getFreeChampionIds(); 			   // 로테이션
+		// lotation.getFreeChampionIdsForNewPlayers(); // 무료
+		//service.champInfo();
+		model.addAttribute("lotation",lotation);
+		// 챔피언 번호 url : http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json
+		// 챔피언 이미지 url : http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/Aatrox.png
 		return "home";
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String serch(String summonerName, Model model) {
-		String lolAPI_key = "RGAPI-49abd081-efb8-49b3-a711-635eaf778187";
+		//String lolAPI_key = "RGAPI-49abd081-efb8-49b3-a711-635eaf778187";
 		
 		LiotService service = new LiotService();
 		SummonerDTO summoner = service.searchSummoner(lolAPI_key, summonerName);
