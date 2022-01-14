@@ -32,7 +32,7 @@
 			    <h3>전적</h3>
 			    <p>승리 : ${league.getWins() } </p>
 			    <p>패배 : ${league.getLosses() } </p>
-			    <p>승률 : ${league.getWinRate() }</p>
+			    <p>승률 : ${league.getWinRate() }%</p>
 			</div>
 		</div>
 	</div>
