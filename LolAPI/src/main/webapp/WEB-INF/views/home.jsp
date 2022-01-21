@@ -23,6 +23,14 @@
 			</div>
 		</form>
 	</section>
-	<p>${lotation.getFreeChampionIds().get(0) }</p>
+	<p>로데이션 챔피언</p>
+	<c:forEach var="lotationFree" items="${lotation.getFreeChampionIds() }" varStatus="status">
+		<p><c:out value="${lotationFree }"></c:out></p>
+	</c:forEach>
+	<hr>
+	<p>신규 유저 무료 챔피언</p>
+	<c:forEach var="lotation" items="${lotation.getFreeChampionIdsForNewPlayers() }" varStatus="status">
+		<p><c:out value="${lotation }"></c:out></p>
+	</c:forEach>
 </body>
 </html>

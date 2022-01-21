@@ -19,7 +19,7 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	String lolAPI_key = "RGAPI-49abd081-efb8-49b3-a711-635eaf778187";
+	String lolAPI_key = "RGAPI-3844467d-ea86-47df-a815-3b9fea18083f";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
