@@ -29,10 +29,10 @@ public class HomeController {
 		
 		// lotation.getFreeChampionIds(); 			   // 로테이션
 		// lotation.getFreeChampionIdsForNewPlayers(); // 무료
-		//service.champInfo();
+		service.champInfo();
 		model.addAttribute("lotation",lotation);
-		// 챔피언 번호 url : http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json
-		// 챔피언 이미지 url : http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/Aatrox.png
+		
+		model.addAttribute("lotation_img","http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/Aatrox.png");
 		return "home";
 	}
 	

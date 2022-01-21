@@ -32,5 +32,6 @@
 	<c:forEach var="lotation" items="${lotation.getFreeChampionIdsForNewPlayers() }" varStatus="status">
 		<p><c:out value="${lotation }"></c:out></p>
 	</c:forEach>
+	<p><img src=${lotation_img } /></p>
 </body>
 </html>

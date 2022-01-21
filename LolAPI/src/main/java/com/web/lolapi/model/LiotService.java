@@ -4,12 +4,20 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Service
 public class LiotService {
 	
 	public SummonerDTO searchSummoner(String lolAPI_key, String summonerName) {
@@ -105,32 +113,33 @@ public class LiotService {
 		return freeChamp;
 	}
 	
-//	public ChampionInfoDTO champInfo() {
-//		String champURL = "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json";
-//		BufferedReader buffer = null;
-//		URL url = null;
-//		ChampionInfoDTO champInfo = new ChampionInfoDTO();
-//		
-//		try {
-//			url = new URL(champURL);
-//			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//			urlConnection.setRequestMethod("GET");
-//			
-//			buffer = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-//			String data = buffer.readLine();
-//			System.out.println(data);
-//			JSONParser jsonParser = new JSONParser();
-//			JSONObject jsonbObject = (JSONObject) jsonParser.parse(data);
-//			
-//			JSONObject champdata = (JSONObject) jsonbObject.get("data");
-//			JSONArray jsonArray = (JSONArray) champdata;
-//			//System.out.println(jsonArray);
-//			//JSONObject champData = (JSONObject) jsonArray.get(0);
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return champInfo;
-//	}
+	public ChampionInfoDTO champInfo() {
+		String champURL = "http://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/champion.json";
+		BufferedReader buffer = null;
+		URL url = null;
+		ChampionInfoDTO champInfo = new ChampionInfoDTO();
+		
+		try {
+			url = new URL(champURL);
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setRequestMethod("GET");
+			
+			buffer = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+			String data = buffer.readLine();
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonbObject = (JSONObject) jsonParser.parse(data);
+			
+			JSONObject parse_data = (JSONObject) jsonbObject.get("data");
+			JSONObject parse_Aatrox = (JSONObject) parse_data.get("Aatrox");
+			System.out.println(parse_Aatrox.get("name"));
+			System.out.println(parse_Aatrox.get("key"));
+			
+			HashMap<String , Object> map = new ObjectMapper().readValue(parse_data.toString(), HashMap.class);
+			System.out.println(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return champInfo;
+	}
 }

@@ -1,6 +1,7 @@
 package com.web.lolapi.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class ChampionInfoDTO {
 	private List<Integer> freeChampionIdsForNewPlayers;
@@ -31,5 +32,5 @@ public class ChampionInfoDTO {
 	public void setChampName(String champName) {
 		this.champName = champName;
 	}
-	
+	private Map<String, Integer> champ;
 }
