@@ -24,8 +24,6 @@ public class HomeController {
 		
 		LiotService service = new LiotService();
 		ChampionInfoDTO lotation = service.lotation(lolAPI_key);
-		// lotation.getFreeChampionIds(); 			   // 로테이션
-		// lotation.getFreeChampionIdsForNewPlayers(); // 무료
 		ChampionInfoDTO champInfo = service.champInfo();
 		
 		String[] img_url_freelotation = new String[lotation.getFreeChampionIds().size()];
@@ -46,8 +44,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String serch(String summonerName, Model model) {
-		//String lolAPI_key = "RGAPI-49abd081-efb8-49b3-a711-635eaf778187";
-		
 		LiotService service = new LiotService();
 		SummonerDTO summoner = service.searchSummoner(lolAPI_key, summonerName);
 		LeagueEntryDTO league = service.searchLeague(lolAPI_key, summoner.getId());
