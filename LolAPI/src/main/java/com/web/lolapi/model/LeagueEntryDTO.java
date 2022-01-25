@@ -12,11 +12,6 @@ public class LeagueEntryDTO {
 	private int wins;
 	private int losses;
 	private int winRate;
-//	private boolean hotStreak;
-//	private boolean veteran;
-//	private boolean freshBlood;
-//	private boolean inactive;
-//	private MiniSeriesDTO miniSeries;
 	public String getLeagueId() {
 		return leagueId;
 	}

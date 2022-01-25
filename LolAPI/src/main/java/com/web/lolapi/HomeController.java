@@ -17,22 +17,30 @@ import com.web.lolapi.model.SummonerDTO;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	String lolAPI_key = "RGAPI-3844467d-ea86-47df-a815-3b9fea18083f";
+	String lolAPI_key = "RGAPI-f747da13-51ee-464d-a80f-bb0df57a592d";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		LiotService service = new LiotService();
 		ChampionInfoDTO lotation = service.lotation(lolAPI_key);
-		
 		// lotation.getFreeChampionIds(); 			   // 로테이션
 		// lotation.getFreeChampionIdsForNewPlayers(); // 무료
-		service.champInfo();
-		model.addAttribute("lotation",lotation);
+		ChampionInfoDTO champInfo = service.champInfo();
 		
-		model.addAttribute("lotation_img","http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/Aatrox.png");
+		String[] img_url_freelotation = new String[lotation.getFreeChampionIds().size()];
+		String[] img_url_freeForNewUser = new String[lotation.getFreeChampionIdsForNewPlayers().size()];
+		
+		for(int i = 0; i <= lotation.getFreeChampionIds().size() - 1; i++) {
+			img_url_freelotation[i] = "http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/" + champInfo.getChamp_name_id().get(lotation.getFreeChampionIds().get(i)) + ".png";
+		}
+		model.addAttribute("freelotation_img",img_url_freelotation);
+		
+		for(int i = 0; i <= lotation.getFreeChampionIdsForNewPlayers().size() - 1; i++) {
+			img_url_freeForNewUser[i] = "http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/" + champInfo.getChamp_name_id().get(lotation.getFreeChampionIdsForNewPlayers().get(i)) + ".png";
+		}
+		model.addAttribute("freeForNewUser_img",img_url_freeForNewUser);
+		
 		return "home";
 	}
 	

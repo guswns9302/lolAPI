@@ -1,13 +1,15 @@
 package com.web.lolapi.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ChampionInfoDTO {
 	private List<Integer> freeChampionIdsForNewPlayers;
 	private List<Integer> freeChampionIds;
-	private int champNum;
-	private String champName;
+	
+	private HashMap<Integer, String> champ_name_id;
+	
 	public List<Integer> getFreeChampionIdsForNewPlayers() {
 		return freeChampionIdsForNewPlayers;
 	}
@@ -20,17 +22,10 @@ public class ChampionInfoDTO {
 	public void setFreeChampionIds(List<Integer> freeChampionIds) {
 		this.freeChampionIds = freeChampionIds;
 	}
-	public int getChampNum() {
-		return champNum;
+	public HashMap<Integer, String> getChamp_name_id() {
+		return champ_name_id;
 	}
-	public void setChampNum(int champNum) {
-		this.champNum = champNum;
+	public void setChamp_name_id(HashMap<Integer, String> champ_name_id) {
+		this.champ_name_id = champ_name_id;
 	}
-	public String getChampName() {
-		return champName;
-	}
-	public void setChampName(String champName) {
-		this.champName = champName;
-	}
-	private Map<String, Integer> champ;
 }

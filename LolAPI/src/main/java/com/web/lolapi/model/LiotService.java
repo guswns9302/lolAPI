@@ -1,11 +1,13 @@
 package com.web.lolapi.model;
 
+import java.awt.RenderingHints.Key;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -93,7 +95,8 @@ public class LiotService {
 		BufferedReader buffer = null;
 		URL url = null;
 		ChampionInfoDTO freeChamp = new ChampionInfoDTO();
-		
+		List<Integer> lotationChampList_id = new ArrayList<Integer>();
+		List<Integer> lotationChampList_id_for_New = new ArrayList<Integer>();
 		try {
 			url = new URL(lotationChampURL);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -103,9 +106,18 @@ public class LiotService {
 			String data = buffer.readLine();
 			JSONParser jsonParser = new JSONParser();
 			JSONObject lotationChampList = (JSONObject) jsonParser.parse(data);
+			JSONArray freeChampionIds = (JSONArray) lotationChampList.get("freeChampionIds");
+			JSONArray freeChampionIdsForNewPlayers = (JSONArray) lotationChampList.get("freeChampionIdsForNewPlayers");
 			
-			freeChamp.setFreeChampionIds((List<Integer>) lotationChampList.get("freeChampionIds"));
-			freeChamp.setFreeChampionIdsForNewPlayers((List<Integer>) lotationChampList.get("freeChampionIdsForNewPlayers"));
+			for(int i = 0; i < freeChampionIds.size() -1; i++) {
+				lotationChampList_id.add(Integer.parseInt(freeChampionIds.get(i).toString()));
+			}
+			for(int i = 0; i < freeChampionIdsForNewPlayers.size() -1; i++) {
+				lotationChampList_id_for_New.add(Integer.parseInt(freeChampionIdsForNewPlayers.get(i).toString()));
+			}
+			
+			freeChamp.setFreeChampionIds(lotationChampList_id);
+			freeChamp.setFreeChampionIdsForNewPlayers(lotationChampList_id_for_New);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -118,6 +130,7 @@ public class LiotService {
 		BufferedReader buffer = null;
 		URL url = null;
 		ChampionInfoDTO champInfo = new ChampionInfoDTO();
+		HashMap<Integer , String> champ_name_id = new HashMap<Integer, String>();
 		
 		try {
 			url = new URL(champURL);
@@ -128,17 +141,21 @@ public class LiotService {
 			String data = buffer.readLine();
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonbObject = (JSONObject) jsonParser.parse(data);
-			
 			JSONObject parse_data = (JSONObject) jsonbObject.get("data");
-			JSONObject parse_Aatrox = (JSONObject) parse_data.get("Aatrox");
-			System.out.println(parse_Aatrox.get("name"));
-			System.out.println(parse_Aatrox.get("key"));
 			
-			HashMap<String , Object> map = new ObjectMapper().readValue(parse_data.toString(), HashMap.class);
-			System.out.println(map);
+			Iterator<String> iterator = parse_data.keySet().iterator();
+			while(iterator.hasNext()) {
+				String key = (String) iterator.next();
+				if(parse_data.get(key) instanceof JSONObject) {
+					JSONObject parse_data_champ_id = (JSONObject) parse_data.get(key);
+					champ_name_id.put(Integer.parseInt(parse_data_champ_id.get("key").toString()), key);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		champInfo.setChamp_name_id(champ_name_id);
 		
 		return champInfo;
 	}
