@@ -17,7 +17,7 @@ import com.web.lolapi.model.SummonerDTO;
 @Controller
 public class HomeController {
 	
-	String lolAPI_key = "RGAPI-f747da13-51ee-464d-a80f-bb0df57a592d";
+	String lolAPI_key = "RGAPI-8abd6378-1409-426c-8719-a9fb302af49a";
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {

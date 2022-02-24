@@ -10,11 +10,8 @@
     <jsp:include page="${head_url }" flush="false" />
 </head>
 <body>
-	<div class="container-fluid p-5 bg-primary text-white text-center">
-		  <h1>Liot API 활용</h1>
-		  <p>전적 검색 웹페이지 만들기</p>
-	</div>
-	<section class="container p-5 my-5 border">
+
+	<section class="container p-5 my-5 border border-5">
 		<h3>League of Legends 전적 검색</h3>
 		<form action="/search" method="post"> 
 			<div class="input-group mb-3">
@@ -23,14 +20,22 @@
 			</div>
 		</form>
 	</section>
-	<p>로데이션 챔피언</p>
-	<c:forEach var="freelotation_img" items="${freelotation_img }" varStatus="status">
-		<span><img src=${freelotation_img } /></span>
-	</c:forEach>
-	<hr>
-	<p>신규 유저 무료 챔피언</p>
-	<c:forEach var="freeForNewUser_img" items="${freeForNewUser_img }" varStatus="status">
-		<span><img src=${freeForNewUser_img } /></span>
-	</c:forEach>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 border border-5">
+				<h3>로데이션 챔피언</h3>
+				<c:forEach var="freelotation_img" items="${freelotation_img }" varStatus="status">
+					<span><img src=${freelotation_img } width="80" height="80"/></span>
+				</c:forEach>
+			</div>
+			<div class="col-sm-6 border border-5">
+				<h3>신규 유저 무료 챔피언</h3>
+				<c:forEach var="freeForNewUser_img" items="${freeForNewUser_img }" varStatus="status">
+					<span><img src=${freeForNewUser_img } width="80" height="80"/></span>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
