@@ -11,30 +11,66 @@
     <jsp:include page="${head_url }" flush="false" />
 </head>
 <body>
-	<div class="container-fluid p-5 bg-primary text-white text-center">
-		  <h1>Liot API 활용</h1>
-		  <p>전적 검색 웹페이지 만들기</p>
-	</div>
-	<div class="container mt-5">
+<section class="container p-5 my-5">
+	<div style="text-align:center;">
 		<div class="row">
-			<div class="col-sm-4">
-				<h3>${summoner.getName() }</h3>
-				<p>Level : ${summoner.getSummonerLevel() }</p>
+			<div class="col-sm-4 border border-5">
+				<h3>소환사</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Level</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${summoner.getName() }</td>
+							<td>${summoner.getSummonerLevel() }</td>
+						</tr>
+					</tbody>
+				</table>
 				<p><img src=${profile_icon } /></p>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4 border border-5">
 			    <h3>솔로랭크</h3>
+			    <table class="table table-striped">
+					<thead>
+						<tr>
+							<th>티어</th>
+							<th>포인트</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${league.getTier() } ${league.getRank() }</td>
+							<td>${league.getLeaguePoints() } LP</td>
+						</tr>
+					</tbody>
+				</table>
 			    <p><img src=${rank_icon } /></p>
-			    <p>${league.getTier() } ${league.getRank() }</p>
-			    <p>${league.getLeaguePoints() } LP</p>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4 border border-5">
 			    <h3>전적</h3>
-			    <p>승리 : ${league.getWins() } </p>
-			    <p>패배 : ${league.getLosses() } </p>
-			    <p>승률 : ${league.getWinRate() }%</p>
+			    <table class="table table-striped">
+					<thead>
+						<tr>
+							<th>승리</th>
+							<th>패배</th>
+							<th>승률</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${league.getWins() }</td>
+							<td>${league.getLosses() }</td>
+							<td>${league.getWinRate() }%</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+</section>
 </body>
 </html>
